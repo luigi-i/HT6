@@ -19,8 +19,7 @@ public class Main {
         String est = sc.nextLine();
         Map<String, Pokemon> mapa = null;
         Usuario user = new Usuario();
-        ArrayList<String> poseedores = new ArrayList<>();
-        String listaAtaque = "";
+
 
         while (!opcion1)
         {
@@ -78,14 +77,8 @@ public class Main {
 
                 case "2":
 
-                    System.out.println("Ingrese el input del pokemon");
-                    input = sc.nextLine();
-                    if(mapa.containsKey(input)){
-                        Pokemon pokemon = mapa.get(input); //si se encuentra al pokemon
-                        System.out.println(pokemon); //se llama al toString de Pokemon
-                    }else{
-                        System.out.println("No existe ese pokemon");
-                    }
+                    m2(sc, mapa);
+
 
                     break;
                 case "3":
@@ -109,26 +102,9 @@ public class Main {
                     break;
 
                 case "5":
-                    boolean verificar5 = false;
-                    System.out.println("Ingrese la habilidad para buscar a sus poseedores");
-                    input = sc.nextLine();
-                    for (Pokemon p : mapa.values()){//entre todos los pokemon
-                        for (String s : p.getAbilities()){//revisa las habilidades de cada uno
-                            if(s.equals(input) && !poseedores.contains(p)){//si la encuentra y aun no se ha agregado
-                                poseedores.add(p.getName() + "\n");//lo agrega a un Arraylist
-                                verificar5 = true;//marcador de que se encontro al menos 1 pokemon
-                            }
-                        }
-                    }
-                    if(!verificar5){ // si el marcador no se activa se muestra el mensaje de error
-                        System.out.println("Ataque no encontrada en ningun pokemon");
-                    }
-                    for(String s : poseedores){
-                        listaAtaque += s ; // agrega a los pokemon a un String para imprirlo mejor
-                    }
-                    System.out.println(listaAtaque);
-                    listaAtaque = "";
-                    poseedores.clear(); //limpia las listas y el String para poder usarlos de nuevo
+
+                    m5(sc, mapa);
+
 
                     break;
 
@@ -192,5 +168,46 @@ public class Main {
 
     }
 
+
+    public static void m5(Scanner sc,Map<String, Pokemon> mapa){
+        String input = "";
+        ArrayList<String> poseedores = new ArrayList<>();
+        String listaAtaque = "";
+
+        boolean verificar5 = false;
+        System.out.println("Ingrese la habilidad para buscar a sus poseedores");
+        input = sc.nextLine();
+        for (Pokemon p : mapa.values()){//entre todos los pokemon
+            for (String s : p.getAbilities()){//revisa las habilidades de cada uno
+                if(s.equals(input) && !poseedores.contains(p)){//si la encuentra y aun no se ha agregado
+                    poseedores.add(p.getName() + "\n");//lo agrega a un Arraylist
+                    verificar5 = true;//marcador de que se encontro al menos 1 pokemon
+                }
+            }
+        }
+        if(!verificar5){ // si el marcador no se activa se muestra el mensaje de error
+            System.out.println("Ataque no encontrada en ningun pokemon");
+        }
+        for(String s : poseedores){
+            listaAtaque += s ; // agrega a los pokemon a un String para imprirlo mejor
+        }
+        System.out.println(listaAtaque);
+        listaAtaque = "";
+        poseedores.clear(); //limpia las listas y el String para poder usarlos de nuevo
+
+    }
+
+    public static void m2(Scanner sc, Map<String, Pokemon> mapa){
+        String input = "";
+
+        System.out.println("Ingrese el input del pokemon");
+        input = sc.nextLine();
+        if(mapa.containsKey(input)){
+            Pokemon pokemon = mapa.get(input); //si se encuentra al pokemon
+            System.out.println(pokemon); //se llama al toString de Pokemon
+        }else{
+            System.out.println("No existe ese pokemon");
+        }
+    }
 
 }
