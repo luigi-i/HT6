@@ -94,17 +94,21 @@ public class Main {
 
                 case "4":
 
-                    mapa.values().stream().sorted(Comparator.comparing(Pokemon::getType1)) // Ordena por tipo 1
-                            .forEach(pokemon ->
-                                    System.out.println(pokemon.getName() + " - " + pokemon.getType1()));
-                    System.out.println("\n");
+
+                    m4(mapa);
+
+//                    Map<String, Pokemon> finalMapa = mapa;
+//                    Profiler.medirTiempo(() -> m4(finalMapa));
+                    //complejidad de operacion #4
+
 
                     break;
 
                 case "5":
 
-                    m5(sc, mapa);
 
+
+                    m5(sc, mapa);
 
                     break;
 
@@ -195,6 +199,14 @@ public class Main {
         listaAtaque = "";
         poseedores.clear(); //limpia las listas y el String para poder usarlos de nuevo
 
+    }
+
+
+    public static void m4(Map<String, Pokemon> mapa){
+        mapa.values().stream().sorted(Comparator.comparing(Pokemon::getType1)) // Ordena por tipo 1
+                .forEach(pokemon ->
+                        System.out.println(pokemon.getName() + " - " + pokemon.getType1()));
+        System.out.println("\n");
     }
 
     public static void m2(Scanner sc, Map<String, Pokemon> mapa){
